@@ -1,2 +1,2 @@
 # Questionnaire
-React + Typescript: Questionnaire 
+React + Typescript

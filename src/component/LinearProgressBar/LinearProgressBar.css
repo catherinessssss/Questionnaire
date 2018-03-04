@@ -1,0 +1,12 @@
+.big-label {
+    font-size: 24px;
+    font-weight: bold;
+}
+.small-label {
+    font-size: 16px;
+    color: #aaa;
+}
+
+.progress-bar {
+    margin-bottom: 10px;
+}

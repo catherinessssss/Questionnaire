@@ -2,21 +2,26 @@
   "name": "questionnaire",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://localhost:3001/",
   "dependencies": {
+    "axios": "^0.18.0",
+    "jsonp": "^0.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts-ts": "2.13.0"
+    "react-scripts-ts": "2.13.0",
+    "watch": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "watch:osx": "watch 'npm run build' src"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.9",
-    "@types/jest": "^22.1.4",
     "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/jest": "^22.1.4",
     "@types/material-ui": "^0.21.1",
     "@types/node": "^9.4.6",
     "@types/react": "^16.0.40",

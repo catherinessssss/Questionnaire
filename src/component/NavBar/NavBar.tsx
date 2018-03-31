@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavBarInterface } from './NavBarInterface';
+// import FlatButton from 'material-ui/FlatButton';
 import './NavBar.css';
 import AppBar from 'material-ui/AppBar';
 
@@ -9,7 +10,13 @@ class NavBar extends React.Component<NavBarInterface, object> {
         const { name, showMenuIconButton = true, titleStyle = { textAlign: 'center' }} = this.props;
 
         return (
-            <AppBar className="navbar" title={name} showMenuIconButton={showMenuIconButton} titleStyle={titleStyle}/>
+            <AppBar
+                className="navbar"
+                title={name}
+                showMenuIconButton={showMenuIconButton}
+                titleStyle={titleStyle}
+                // iconElementRight={<FlatButton label="提交"/>}
+            />
         );
     }
 }

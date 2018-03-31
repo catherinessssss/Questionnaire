@@ -19,15 +19,16 @@ class LinearProgressBar extends React.Component {
 
     render() {
         const styles = {
-            marginTop: 10,
+            marginTop: 5,
             backgroundColor: 'white',
             height: 10,
             borderRadius: 5,
+            flex: 4,
         };
 
         return (
             <div className="progress-bar">
-                <div>
+                <div className="progress-number">
                     <label className="big-label">#7</label><label className="small-label"> of 10</label>
                 </div>
                 <LinearProgress style={styles} mode={'determinate'} max={10} min={0} value={7}/>

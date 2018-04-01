@@ -1,21 +1,18 @@
 import * as React from 'react';
 import './LinearProgressBar.css';
-// import { LinearProgressBarInterface } from './LinearProgressBarInterface';
+import { LinearProgressBarProps } from './LinearProgressBarProps';
+import { LinearProgressBarState } from './LinearProgressBarState';
 import LinearProgress from 'material-ui/LinearProgress';
 
-class LinearProgressBar extends React.Component {
+class LinearProgressBar extends React.Component<LinearProgressBarProps, LinearProgressBarState> {
 
-    constructor( props: number ) {
+    constructor(props: LinearProgressBarProps ) {
         super(props);
-
+        // todo delete
         this.state = {
             completed: 1
         };
     }
-
-    // this.setState((prevState, props) => ({
-    //     counter: prevState.counter + props.increment
-    // }));
 
     render() {
         const styles = {
@@ -23,15 +20,22 @@ class LinearProgressBar extends React.Component {
             backgroundColor: 'white',
             height: 10,
             borderRadius: 5,
-            flex: 4,
+            flex: 1,
         };
 
         return (
             <div className="progress-bar">
                 <div className="progress-number">
-                    <label className="big-label">#7</label><label className="small-label"> of 10</label>
+                    <label className="big-label">#{this.props.value + 1}</label>
+                    <label className="small-label"> of {this.props.max}</label>
                 </div>
-                <LinearProgress style={styles} mode={'determinate'} max={10} min={0} value={7}/>
+                <LinearProgress
+                    style={styles}
+                    mode={'determinate'}
+                    max={this.props.max}
+                    min={0}
+                    value={this.props.value + 1}
+                />
             </div>
         );
     }

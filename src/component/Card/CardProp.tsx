@@ -1,3 +1,6 @@
+import { Answer } from '../../model/Answer';
+import { FakeAnswer } from '../../model/FakeAnswer';
+
 export interface CardProp {
-    questionNumber: number;
+    translatorAnswer: Answer|FakeAnswer|null;
 }

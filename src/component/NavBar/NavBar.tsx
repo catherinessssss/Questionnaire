@@ -1,13 +1,24 @@
 import * as React from 'react';
-import { NavBarInterface } from './NavBarInterface';
-// import FlatButton from 'material-ui/FlatButton';
-import './NavBar.css';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+import { NavBarProps } from './NavBarProps';
 import AppBar from 'material-ui/AppBar';
+import './NavBar.css';
 
-class NavBar extends React.Component<NavBarInterface, object> {
+const paperPlane = require('../../images/paper-plane.svg');
+
+const PaperPlaneIcon = () => (
+    <IconButton>
+        <FontIcon>
+            <img src={paperPlane} alt="submit-icon" className="submit-icon"/>
+        </FontIcon>
+    </IconButton>
+);
+
+class NavBar extends React.Component<NavBarProps, object> {
 
     render() {
-        const { name, showMenuIconButton = true, titleStyle = { textAlign: 'center' }} = this.props;
+        const { name, showMenuIconButton = true, titleStyle = { textAlign: 'left' }} = this.props;
 
         return (
             <AppBar
@@ -15,7 +26,7 @@ class NavBar extends React.Component<NavBarInterface, object> {
                 title={name}
                 showMenuIconButton={showMenuIconButton}
                 titleStyle={titleStyle}
-                // iconElementRight={<FlatButton label="提交"/>}
+                iconElementRight={<PaperPlaneIcon/>}
             />
         );
     }

@@ -1,4 +1,4 @@
-import { Question } from '../model/Question';
+import Question from '../model/Question';
 import config from '../config/config';
 const jsonp = require('jsonp');
 
@@ -36,11 +36,10 @@ class QuestionAPI {
 
     private resolveQuestions(data: any): Promise<Question[]> {
         const questions = data.question.map((question: Question) => {
-            let item: Question = {
-                _id: question._id,
-                context: question.context,
-                meta: question.meta,
-            };
+            let item = new Question({
+                theId: question._id,
+                theContext: question.context,
+            });
             return item;
         });
 

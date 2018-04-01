@@ -10,8 +10,8 @@ import { CardState } from './CardState';
 // import { uncleanAnswerAPI } from '../../api/uncleanAnswerAPI';
 // import { answerAPI } from '../../api/answerAPI';
 // import { fakeAnswerAPI } from '../../api/fakeAnswerAPI';
-// import { Answer } from '../../model/Answer';
-// import { FakeAnswer } from '../../model/FakeAnswer';
+import Answer from '../../model/Answer';
+import QuestionClass from '../../model/Question';
 
 class Card extends React.Component<CardProp, CardState> {
 
@@ -21,20 +21,26 @@ class Card extends React.Component<CardProp, CardState> {
             question: [],
             answer: [],
             checkedNumber: 0,
-            checkedFakeNumber: 0,
+            value: '',
         };
     }
 
-    onChildChanged = (checkedNumber: number, checkedFakeNumber: number): void => {
+    onChildChanged = (checkedNumber: number, value: string): void => {
         this.setState({
             checkedNumber: checkedNumber,
-            checkedFakeNumber : checkedFakeNumber,
+            value: value,
         });
-    }
+        const question = new QuestionClass({theContext: '123'});
+        const testAnswer = new Answer({
+            theContext: 'Hi',
+            theStep: 2,
+            theRoot: question,
+            theSuper: null,
+            theAuthor: 'sss',
+        });
 
-    // renderList(list: any, questionNumber: number) {
-    //     return list.map((item: Answer|FakeAnswer, index: number) => this.renderItem(item, index));
-    // }
+        this.props.getUserAnswer(testAnswer);
+    }
 
     renderItem(item: any) {
         if (item === null) {
@@ -53,7 +59,7 @@ class Card extends React.Component<CardProp, CardState> {
                 marginTop: 16
             };
 
-            let { expectAnswer = '' } = item;
+            // let { expectAnswer = '' } = item;
 
             return (
                 <CardUI containerStyle={containerStyle}>
@@ -63,8 +69,6 @@ class Card extends React.Component<CardProp, CardState> {
                     <Accordance3
                         updateParentState={this.onChildChanged}
                         checkedNumber={this.state.checkedNumber}
-                        checkedFakeNumber={this.state.checkedFakeNumber}
-                        expectAnswer={expectAnswer}
                     />
                 </CardUI>
             );
@@ -72,30 +76,13 @@ class Card extends React.Component<CardProp, CardState> {
         }
     }
 
-    // async componentDidMount() {
-    //     const questions = await questionAPI.getAllQuestions();
-    //     const answers = await answerAPI.getRandomAnswer(this.props.questionNumber);
-    //     const fakeAnswers = await fakeAnswerAPI.getRandomAnswer(this.props.questionNumber);
-    //     const allAnswers = answers.concat(fakeAnswers);
-
-    //     // ramdom sort the array
-    //     allAnswers.sort(() => { return 0.5 - Math.random(); });
-    //     this.setState({
-    //         question: questions,
-    //         answer: allAnswers,
-    //     });
-
-        // const testdata = await uncleanAnswerAPI.saveAnswer(null);
-        // console.log(testdata);
-    // }
-
     render() {
 
-        const { translatorAnswer } = this.props;
+        const { translatorAnswerItem } = this.props;
 
         return (
             <div>
-                {this.renderItem(translatorAnswer)}
+                {this.renderItem(translatorAnswerItem)}
             </div>
         );
     }

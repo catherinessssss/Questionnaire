@@ -1,6 +1,7 @@
-import { Answer } from '../../model/Answer';
-import { FakeAnswer } from '../../model/FakeAnswer';
+import Answer from '../../model/Answer';
+import FakeAnswer from '../../model/FakeAnswer';
 
 export interface CardProp {
-    translatorAnswer: Answer|FakeAnswer|null;
+    translatorAnswerItem: Answer|FakeAnswer|null;
+    getUserAnswer: any;
 }

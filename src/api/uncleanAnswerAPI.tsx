@@ -1,4 +1,4 @@
-import { UncleanAnswer } from '../model/UncleanAnswer';
+import UncleanAnswer from '../model/UncleanAnswer';
 import config from '../config/config';
 const axios = require('axios');
 

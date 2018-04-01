@@ -10,6 +10,8 @@ import { MuiThemeProvider } from 'material-ui/styles';
 // import { uncleanAnswerAPI } from '../../api/uncleanAnswerAPI';
 import { answerAPI } from '../../api/answerAPI';
 import { fakeAnswerAPI } from '../../api/fakeAnswerAPI';
+// import Answer from '../../model/Answer';
+// import FakeAnswer from '../../model/FakeAnswer';
 import './App.css';
 
 // const logo = require('./logo.svg');
@@ -22,7 +24,7 @@ class App extends React.Component<AppProps, AppState> {
       answer: [],
       checkedNumber: 0,
       checkedFakeNumber: 0,
-      answerItem: null,
+      translatorAnswerItem: null,
       getAnswerYet: false,
       timestamp: new Date().getTime(),
     };
@@ -38,8 +40,13 @@ class App extends React.Component<AppProps, AppState> {
     this.setState({
         answer: allAnswers,
         getAnswerYet: true,
-        answerItem: allAnswers[this.state.checkedNumber]
+        translatorAnswerItem: allAnswers[this.state.checkedNumber]
     });
+  }
+
+  saveUserAnswer = (userAnswer: any) => {
+    // todo
+    console.log(userAnswer);
   }
 
   render() {
@@ -55,7 +62,7 @@ class App extends React.Component<AppProps, AppState> {
               <NavBar name="问卷调查" showMenuIconButton={false} />
               <div className="content" key={this.state.timestamp}>
                 <LinearProgressBar value={this.state.checkedNumber} max={this.props.questionNumber} />
-                <Card translatorAnswer={this.state.answerItem}/>
+                <Card translatorAnswerItem={this.state.translatorAnswerItem} getUserAnswer={this.saveUserAnswer}/>
               </div>
             </div>
         )}

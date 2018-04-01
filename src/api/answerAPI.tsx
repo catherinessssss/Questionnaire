@@ -1,4 +1,4 @@
-import { Answer } from '../model/Answer';
+import Answer from '../model/Answer';
 import config from '../config/config';
 const jsonp = require('jsonp');
 
@@ -36,15 +36,14 @@ class AnswerAPI {
 
     private resolveAnswers(data: any): Promise<Answer[]> {
         const answers = data.answers.map((answer: Answer) => {
-            let item: Answer = {
-                _id: answer._id,
-                context: answer.context,
-                meta: answer.meta,
-                step: answer.step,
-                root: answer.root,
-                super: answer.super,
-                author: answer.author,
-            };
+            let item = new Answer({
+                theId: answer._id,
+                theContext: answer.context,
+                theStep: answer.step,
+                theRoot: answer.root,
+                theSuper: answer.super,
+                theAuthor: answer.author,
+            });
             return item;
         });
 

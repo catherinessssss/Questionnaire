@@ -4,42 +4,51 @@ import Divider from 'material-ui/Divider';
 import Accordance3 from '../Answers/Accordance3/Accordance3';
 import Question from '../Question/Question';
 import './Card.css';
-import { CardProp } from './CardProp';
+import { CardProps } from './CardProps';
 import { CardState } from './CardState';
 // import { questionAPI } from '../../api/questionAPI';
 // import { uncleanAnswerAPI } from '../../api/uncleanAnswerAPI';
 // import { answerAPI } from '../../api/answerAPI';
 // import { fakeAnswerAPI } from '../../api/fakeAnswerAPI';
-import Answer from '../../model/Answer';
-import QuestionClass from '../../model/Question';
+// import Answer from '../../model/Answer';
+// import QuestionClass from '../../model/Question';
 
-class Card extends React.Component<CardProp, CardState> {
+class Card extends React.Component<CardProps, CardState> {
 
-    constructor(props: CardProp) {
+    constructor(props: CardProps) {
         super(props);
         this.state = {
-            question: [],
-            answer: [],
-            checkedNumber: 0,
+            checked: false,
             value: '',
+            correctStatus: false,
+            isFakeAnswer: false,
         };
     }
 
-    onChildChanged = (checkedNumber: number, value: string): void => {
+    onChildChanged = (checked: boolean, value: string): void => {
+
+        let { expectAnswer = '' } = this.props.translatorAnswerItem;
+        let correctStatus = this.state.correctStatus;
+        let isFakeAnswer = this.state.isFakeAnswer;
+
+        if (expectAnswer === '' || expectAnswer === value) {
+            correctStatus = true;
+        } else {
+            correctStatus = false;
+        }
+
+        if (expectAnswer !== '') {
+            isFakeAnswer = true;
+        }
+
         this.setState({
-            checkedNumber: checkedNumber,
+            checked: checked,
             value: value,
-        });
-        const question = new QuestionClass({theContext: '123'});
-        const testAnswer = new Answer({
-            theContext: 'Hi',
-            theStep: 2,
-            theRoot: question,
-            theSuper: null,
-            theAuthor: 'sss',
+            correctStatus: correctStatus,
+            isFakeAnswer: isFakeAnswer,
         });
 
-        this.props.getUserAnswer(testAnswer);
+        this.props.getUserAnswer(value, isFakeAnswer, correctStatus, checked);
     }
 
     renderItem(item: any) {
@@ -59,8 +68,6 @@ class Card extends React.Component<CardProp, CardState> {
                 marginTop: 16
             };
 
-            // let { expectAnswer = '' } = item;
-
             return (
                 <CardUI containerStyle={containerStyle}>
                     <CardTitle title="Q: 如下粤语与中文意思是否一致?" titleStyle={titleStyle}/>
@@ -68,7 +75,6 @@ class Card extends React.Component<CardProp, CardState> {
                     <Divider />
                     <Accordance3
                         updateParentState={this.onChildChanged}
-                        checkedNumber={this.state.checkedNumber}
                     />
                 </CardUI>
             );

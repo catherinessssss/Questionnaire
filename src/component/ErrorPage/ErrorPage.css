@@ -1,0 +1,12 @@
+.error-img {
+    background-size: contain;
+    width: 100%;
+    padding-top: 64px;
+}
+
+.error-div {
+    background-color: #f7f7f7;
+    position: fixed;
+    margin-top: -64px;
+    height: 100%;
+}

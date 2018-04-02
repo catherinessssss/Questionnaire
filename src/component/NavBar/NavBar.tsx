@@ -7,15 +7,18 @@ import './NavBar.css';
 
 const paperPlane = require('../../images/paper-plane.svg');
 
-const PaperPlaneIcon = () => (
-    <IconButton>
-        <FontIcon>
-            <img src={paperPlane} alt="submit-icon" className="submit-icon"/>
-        </FontIcon>
-    </IconButton>
-);
-
 class NavBar extends React.Component<NavBarProps, object> {
+    PaperPlaneIcon = () => (
+        <IconButton onClick={this.onUpdateParentState}>
+            <FontIcon>
+                <img src={paperPlane} alt="submit-icon" className="submit-icon"/>
+            </FontIcon>
+        </IconButton>
+    )
+
+    onUpdateParentState = (event: object): void => {
+        this.props.updateParentState();
+    }
 
     render() {
         const { name, showMenuIconButton = true, titleStyle = { textAlign: 'left' }} = this.props;
@@ -26,7 +29,8 @@ class NavBar extends React.Component<NavBarProps, object> {
                 title={name}
                 showMenuIconButton={showMenuIconButton}
                 titleStyle={titleStyle}
-                iconElementRight={<PaperPlaneIcon/>}
+                iconElementRight={<this.PaperPlaneIcon/>}
+                onRightIconButtonClick={this.onUpdateParentState}
             />
         );
     }

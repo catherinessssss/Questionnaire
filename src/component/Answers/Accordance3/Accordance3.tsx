@@ -14,29 +14,17 @@ class Accordance3 extends React.Component<Accordance3Props, Accordance3State> {
     }
 
     onUpdateParentState = (event: object, value: string): void => {
-        let checkedNumber = this.props.checkedNumber;
-        // let checkedFakeNumber = this.props.checkedFakeNumber;
-        // let expectAnswer = this.props.expectAnswer;
         let checked = this.state.checked;
-
-        // answer correct
-        // if (value === expectAnswer) {
-        //     checkedFakeNumber++;
-        // } else {
-        //     checkedFakeNumber = checkedFakeNumber > 0 ? --checkedFakeNumber : checkedFakeNumber;
-        // }
 
         if (!checked) {
             checked = !checked;
-            checkedNumber++;
 
             this.setState({
                 checked: true,
             });
         }
 
-        this.props.updateParentState(checkedNumber, value);
-
+        this.props.updateParentState(checked, value);
     }
 
     render() {

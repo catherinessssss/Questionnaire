@@ -8,10 +8,6 @@ class LinearProgressBar extends React.Component<LinearProgressBarProps, LinearPr
 
     constructor(props: LinearProgressBarProps ) {
         super(props);
-        // todo delete
-        this.state = {
-            completed: 1
-        };
     }
 
     render() {
@@ -34,7 +30,7 @@ class LinearProgressBar extends React.Component<LinearProgressBarProps, LinearPr
                     mode={'determinate'}
                     max={this.props.max}
                     min={0}
-                    value={this.props.value + 1}
+                    value={this.props.value}
                 />
             </div>
         );

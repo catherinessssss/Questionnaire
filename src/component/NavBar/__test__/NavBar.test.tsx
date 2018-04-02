@@ -4,7 +4,7 @@ import NavBar from '../NavBar';
 
 it('renders the correct text with an exlicit title', () => {
     const submitAnswer = () => {
-        console.log('test');
+        alert('submit answer');
     };
 
     const navbar = enzyme.shallow(<NavBar name="Daniel" showMenuIconButton={false} updateParentState={submitAnswer}/>);

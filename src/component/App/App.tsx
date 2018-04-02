@@ -8,17 +8,12 @@ import Card from '../Card/Card';
 import SuccessPage from '../SuccessPage/SuccessPage';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { MuiThemeProvider } from 'material-ui/styles';
-// import { questionAPI } from '../../api/questionAPI';
-// import { uncleanAnswerAPI } from '../../api/uncleanAnswerAPI';
 import { answerAPI } from '../../api/answerAPI';
 import { fakeAnswerAPI } from '../../api/fakeAnswerAPI';
 import { uncleanAnswerAPI } from '../../api/uncleanAnswerAPI';
 import Answer from '../../model/Answer';
 import UncleanAnswer from '../../model/UncleanAnswer';
-// import FakeAnswer from '../../model/FakeAnswer';
 import './App.css';
-
-// const logo = require('./logo.svg');
 
 class App extends React.Component<AppProps, AppState> {
 
@@ -61,7 +56,6 @@ class App extends React.Component<AppProps, AppState> {
    */
   getUserAnswer = (value: string, isFakeAnswer: boolean, correctStatus: boolean, checked: boolean) => {
     // do some operation when it has been selected.
-    console.log('fake' + isFakeAnswer);
     if (!!checked) {
       this.setState({
         checked: true,
@@ -118,19 +112,16 @@ class App extends React.Component<AppProps, AppState> {
       }
     } else {
       // todo alert ui
-      alert('请先选择');
-      // let div = document.createElement('div');
-      // div.innerHTML = '请先选择';
-      // document.body.appendChild(div);
+      alert('请先选择一个答案！');
     }
   }
 
   render() {
 
     const getAnswerYet = this.state.getAnswerYet;
-    console.log(!this.state.failed && this.state.checkedNumber === this.state.answers.length);
+    const answerLength = this.state.answers.length;
 
-    if (!this.state.failed && this.state.checkedNumber === this.state.answers.length) {
+    if (!this.state.failed && answerLength !== 0 && this.state.checkedNumber === answerLength ) {
       return (
         <MuiThemeProvider>
           <SuccessPage />

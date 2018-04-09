@@ -14,4 +14,5 @@ export interface AppState {
     checked: boolean;
     isFakeAnswer: boolean;
     userAnswers: Array<Answer|FakeAnswer>;
+    uuid: string;
 }

@@ -2,39 +2,30 @@ import UncleanAnswer from '../model/UncleanAnswer';
 import config from '../config/config';
 const axios = require('axios');
 
-const jsonpPromise = function (url: string, requestData: object|null) {
-    return new Promise((resolve, reject) => {
-        axios.post(url, requestData, (error: any, data: any) => {
-            if (error) {
-                reject(error);
-            } else {
-                resolve(data);
-            }
-        });
-    });
-};
-
 class UncleanAnswerAPI {
 
-    async saveAnswer(requestData: Array<UncleanAnswer>): Promise<Response> {
+    async saveAnswer(requestData: Array<UncleanAnswer>): Promise<string> {
 
-        const saveAnswerUrl: string = config.getSaveUncleanAnswerUrl;
+        try {
+            const saveAnswerUrl: string = config.getSaveUncleanAnswerUrl;
 
-        const response = await jsonpPromise(saveAnswerUrl, requestData);
+            const response = await axios.post(saveAnswerUrl, requestData);
 
-        return await this.checkStatus(response);
+            return this.checkStatus(response);
+
+        } catch (error) {
+            return Promise.reject(error);
+        }
 
     }
 
-    private checkStatus(response: any): Promise<Response> {
-        if (response.success) {
-            return Promise.resolve(response);
+    private checkStatus(response: any): Promise<string> {
+        if (response.data.success) {
+            return Promise.resolve(response.data.uuid);
         } else {
-            let error = new Error(response.statusText);
-            throw error;
+            return Promise.reject(response.data.messages);
         }
     }
-
 }
 
 export const uncleanAnswerAPI = new UncleanAnswerAPI();

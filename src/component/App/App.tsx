@@ -6,6 +6,7 @@ import LinearProgressBar from '../LinearProgressBar/LinearProgressBar';
 import CircularProgressLoading from '../CircularProgressLoading/CircularProgressLoading';
 import Card from '../Card/Card';
 import SuccessPage from '../SuccessPage/SuccessPage';
+import UUID from '../UUID/UUID';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { answerAPI } from '../../api/answerAPI';
@@ -32,6 +33,7 @@ class App extends React.Component<AppProps, AppState> {
       checked: false,
       isFakeAnswer: false,
       userAnswers: [],
+      uuid: '',
     };
   }
 
@@ -96,6 +98,11 @@ class App extends React.Component<AppProps, AppState> {
       if (!this.state.isFakeAnswer) {
         userAnswers = userAnswers.concat(answer);
       }
+      let uuidv4 = this.state.uuid;
+
+      if (!failed && checkedNumber === this.state.answers.length) {
+        uuidv4 = await uncleanAnswerAPI.saveAnswer(userAnswers);
+      }
 
       this.setState({
         failed: failed,
@@ -105,11 +112,9 @@ class App extends React.Component<AppProps, AppState> {
         checkedNumber: checkedNumber,
         timestamp: new Date().getTime(),
         translatorAnswerItem : this.state.answers[checkedNumber],
+        uuid: uuidv4,
       });
 
-      if (!failed && checkedNumber === this.state.answers.length) {
-        await uncleanAnswerAPI.saveAnswer(userAnswers);
-      }
     } else {
       // todo alert ui
       alert('请先选择一个答案！');
@@ -124,7 +129,10 @@ class App extends React.Component<AppProps, AppState> {
     if (!this.state.failed && answerLength !== 0 && this.state.checkedNumber === answerLength ) {
       return (
         <MuiThemeProvider>
-          <SuccessPage />
+          <div>
+            <SuccessPage/>
+            <UUID uuid={this.state.uuid} />
+          </div>
         </MuiThemeProvider>
       );
     } else if (this.state.failed) {

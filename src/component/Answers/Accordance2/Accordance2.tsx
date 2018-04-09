@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { CardActions } from 'material-ui/Card';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import { Accordance3Props } from './Accordance3Props';
-import { Accordance3State } from './Accordance3State';
-import './Accordance3.css';
+import { Accordance2Props } from './Accordance2Props';
+import { Accordance2State } from './Accordance2State';
+import './Accordance2.css';
 
-class Accordance3 extends React.Component<Accordance3Props, Accordance3State> {
-    constructor(props: Accordance3Props ) {
+class Accordance3 extends React.Component<Accordance2Props, Accordance2State> {
+    constructor(props: Accordance2Props ) {
         super(props);
         this.state = {
             checked: false,
@@ -37,13 +37,8 @@ class Accordance3 extends React.Component<Accordance3Props, Accordance3State> {
                         className={'radio-button'}
                     />
                     <RadioButton
-                        value="部分一致"
-                        label="部分一致"
-                        className={'radio-button'}
-                    />
-                    <RadioButton
-                        value="完全不一致"
-                        label="完全不一致"
+                        value="不一致"
+                        label="不一致"
                         className={'radio-button'}
                     />
                 </RadioButtonGroup>

@@ -1,17 +1,11 @@
 import * as React from 'react';
 import { Card as CardUI, CardTitle } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
-import Accordance3 from '../Answers/Accordance3/Accordance3';
+import Accordance2 from '../Answers/Accordance2/Accordance2';
 import Question from '../Question/Question';
 import './Card.css';
 import { CardProps } from './CardProps';
 import { CardState } from './CardState';
-// import { questionAPI } from '../../api/questionAPI';
-// import { uncleanAnswerAPI } from '../../api/uncleanAnswerAPI';
-// import { answerAPI } from '../../api/answerAPI';
-// import { fakeAnswerAPI } from '../../api/fakeAnswerAPI';
-// import Answer from '../../model/Answer';
-// import QuestionClass from '../../model/Question';
 
 class Card extends React.Component<CardProps, CardState> {
 
@@ -53,7 +47,7 @@ class Card extends React.Component<CardProps, CardState> {
 
     renderItem(item: any) {
         if (item === null) {
-            return;
+            return '';
         } else {
             const titleStyle = {
                 background: '#fbfbfb',
@@ -73,7 +67,7 @@ class Card extends React.Component<CardProps, CardState> {
                     <CardTitle title="Q: 如下粤语与中文意思是否一致?" titleStyle={titleStyle}/>
                     <Question answer={item.context} question={item.root.context}/>
                     <Divider />
-                    <Accordance3
+                    <Accordance2
                         updateParentState={this.onChildChanged}
                     />
                 </CardUI>

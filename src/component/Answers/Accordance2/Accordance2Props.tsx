@@ -1,3 +1,3 @@
-export interface Accordance3Props {
+export interface Accordance2Props {
     updateParentState: (checked: boolean, value: string) => void;
 }

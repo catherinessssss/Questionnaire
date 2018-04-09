@@ -6,7 +6,7 @@ import App from './component/App/App';
 import './index.css';
 
 ReactDOM.render(
-  <App questionNumber={4} />,
+  <App questionNumber={18} />,
   document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();

@@ -2,5 +2,9 @@
     text-align: center;
     line-height: 34px;
     color: #777;
+}
 
+.uuid-ipt {
+    color: transparent;
+    border: none;
 }

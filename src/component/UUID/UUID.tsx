@@ -5,7 +5,7 @@ import { UUIDState } from './UUIDState';
 
 class UUID extends React.Component<UUIDProps, UUIDState> {
 
-    UUIDElement;
+    protected textInput: HTMLInputElement;
 
     constructor(props: UUIDProps) {
         super(props);
@@ -14,12 +14,11 @@ class UUID extends React.Component<UUIDProps, UUIDState> {
         };
     }
 
-    copy = () => {
-        this.UUIDElement.select();
+    copy = (event: object): void => {
+        this.textInput.select();
+
         document.execCommand('copy');
-        this.setState({
-            copySuccess: '复制成功!'
-        });
+        this.setState({ copySuccess: '复制成功!' });
     }
 
     render() {
@@ -32,10 +31,10 @@ class UUID extends React.Component<UUIDProps, UUIDState> {
                 {
                     document.queryCommandSupported('copy') &&
                     <input
-                        type="hidden"
-                        id="uuid"
-                        value={this.props.uuid}
-                        ref={(input) => this.UUIDElement = input}
+                        type="text"
+                        className="uuid-ipt"
+                        defaultValue={uuid}
+                        ref={(input) => { this.textInput = input!; }}
                     />
                 }
                 <p>{this.state.copySuccess}</p>

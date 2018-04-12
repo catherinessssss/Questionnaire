@@ -15,9 +15,30 @@ class UUID extends React.Component<UUIDProps, UUIDState> {
     }
 
     copy = (event: object): void => {
-        this.textInput.select();
+        let textInput = this.textInput;
+
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+            let ediable = textInput.contentEditable;
+            let readOnly = textInput.readOnly;
+            textInput.contentEditable = 'true';
+            textInput.readOnly = false;
+
+            let range = document.createRange();
+            range.selectNodeContents(textInput);
+
+            let select = window.getSelection();
+            select.removeAllRanges();
+            select.addRange(range);
+            textInput.setSelectionRange(0, 999999);
+
+            textInput.contentEditable = ediable;
+            textInput.readOnly = readOnly;
+        } else {
+            textInput.select();
+        }
 
         document.execCommand('copy');
+        textInput.blur();
         this.setState({ copySuccess: '复制成功!' });
     }
 
@@ -27,16 +48,13 @@ class UUID extends React.Component<UUIDProps, UUIDState> {
         return(
             <div className="uuid">
                 <p>请截图此页面并复制唯一识别码提交至平台</p>
-                <p id="puuid" onClick={this.copy}>{uuid}</p>
-                {
-                    document.queryCommandSupported('copy') &&
-                    <input
-                        type="text"
-                        className="uuid-ipt"
-                        defaultValue={uuid}
-                        ref={(input) => { this.textInput = input!; }}
-                    />
-                }
+                <input
+                    className="uuid-ipt"
+                    readOnly={true}
+                    onClick={this.copy}
+                    value={uuid}
+                    ref={(input) => { this.textInput = input!; }}
+                />
                 <p>{this.state.copySuccess}</p>
             </div>
         );

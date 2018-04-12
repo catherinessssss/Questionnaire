@@ -5,6 +5,9 @@
 }
 
 .uuid-ipt {
-    color: transparent;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
     border: none;
 }
